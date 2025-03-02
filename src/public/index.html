@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система обращений</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>Система Обращений</h1>
+    <form id="ticketForm">
+        <input type="text" id="subject" placeholder="Тема обращения" required>
+        <textarea id="message" placeholder="Текст обращения" required></textarea>
+        <button type="submit">Создать Обращение</button>
+    </form>
+    <div class="filter-form">
+        <h3>Фильтрация обращений по диапазону дат</h3>
+        <input type="date" id="startDate" required min="1990-01-01" max="2026-01-01">
+        <input type="date" id="endDate" required min="1990-01-01" max="2026-01-01">
+        <button id="filterButton">Фильтрировать</button>
+        <button id="clearFilterButton">Очистить фильтр</button>
+        <button id="cancelAllButton">Отменить все обращения в работе</button>
+
+    </div>
+    <div class="ticket-list" id="ticketList"></div>
+    <div class="popup" id="reason-popup">
+        <div class="popup-content">
+            <h3>Введите причину</h3>
+            <textarea id="reason-text" placeholder="Введите причину..."></textarea>
+            <button id="submit-reason">Подтвердить</button>
+            <button id="cancel-reason">Отмена</button>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

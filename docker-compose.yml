@@ -1,0 +1,41 @@
+services:
+  app:
+    build: .
+    environment:
+      DB_HOST: prod_db
+      DB_USER: prod_user
+      DB_PASSWORD: prod_password
+      DB_NAME: prod_db
+    ports:
+      - "3000:3000"
+    depends_on:
+      prod_db:
+        condition: service_healthy
+
+  prod_db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: prod_db
+      MYSQL_USER: prod_user
+      MYSQL_PASSWORD: prod_password
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
+      LANG: C.UTF-8
+    ports:
+      - "3306:3306"
+#    volumes:
+#      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      
+  frontend:
+    build: ./src/public
+    ports:
+      - "8080:80"
+
+#volumes:
+#  mysql_data:
